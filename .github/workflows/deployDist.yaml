@@ -7,14 +7,15 @@ on:
             - 'feature/**'
         paths-ignore:
             - '.github/workflows/*'  
-            - README.md  
+       
     workflow_dispatch:        
 jobs:
     test:
         runs-on: ubuntu-latest
         steps:
             - name: Get Code
-              # uses: actions/checkout@v4
+              # uses: actions/checkout@v4 
+              # or we can do manually 
               run: |
                 echo "cloning repo.."
                 echo "${{toJson(github)}}"
@@ -40,9 +41,15 @@ jobs:
           - name: Get Code
             uses: actions/checkout@v4
           - name: Install Node 20
-            uses: actions/setup-node@v4
-            with: 
-              node-version: 20
+            # uses: actions/setup-node@v4
+            # with: 
+            #   node-version: 20
+            run: |
+                sudo apt-get update
+                sudo apt-get install -y nodejs npm
+              
+ 
+
           - name: Cache Dependencies
             uses: actions/cache@v4
             with: 
